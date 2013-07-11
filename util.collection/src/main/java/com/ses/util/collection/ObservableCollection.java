@@ -64,8 +64,9 @@ public class ObservableCollection<E> implements Collection<E> {
 	}
 
 	public void clear() {
-		fireUpdate(new ArrayList<E>(base), false);
+		ArrayList<E> old = new ArrayList<E>(base);
 		base.clear();
+		fireUpdate(old, false);
 	}
 
 	public boolean contains(Object o) {
