@@ -1,6 +1,7 @@
 package com.ses.util.collection;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -17,10 +18,11 @@ public class ObservableCollection<E> implements Collection<E> {
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	protected void fireUpdate(E diff, boolean isAddition) {
-		ArrayList<E> diff2 = new ArrayList<E>();
-		diff2.add(diff);
-		fireUpdate(diff2, isAddition);
+		if (diff != null) {
+			fireUpdate(Arrays.asList(diff), isAddition);
+		}
 	}
 
 	public ObservableCollection(Collection<E> base) {
@@ -47,13 +49,17 @@ public class ObservableCollection<E> implements Collection<E> {
 
 	public boolean add(E e) {
 		boolean result = base.add(e);
-		fireUpdate(e, true);
+		if (result) {
+			fireUpdate(e, true);
+		}
 		return result;
 	}
 
 	public boolean addAll(Collection<? extends E> c) {
 		boolean result = base.addAll(c);
-		fireUpdate(new ArrayList<E>(c), true);
+		if (result) {
+			fireUpdate(new ArrayList<E>(c), true);
+		}
 		return result;
 	}
 
@@ -92,25 +98,30 @@ public class ObservableCollection<E> implements Collection<E> {
 	@SuppressWarnings("unchecked")
 	public boolean remove(Object o) {
 		boolean result = base.remove(o);
-		fireUpdate((E) o, false);
+		if (result) {
+			fireUpdate((E) o, false);
+		}
 		return result;
 	}
 
 	@SuppressWarnings("unchecked")
 	public boolean removeAll(Collection<?> c) {
 		boolean result = base.removeAll(c);
-		fireUpdate(new ArrayList<E>((Collection<E>)c), false);
+		if (result) {
+			fireUpdate(new ArrayList<E>((Collection<E>) c), false);
+		}
 		return result;
 	}
 
 	public boolean retainAll(Collection<?> c) {
 		ArrayList<E> diff = new ArrayList<E>(base);
-		boolean retainAll = base.retainAll(c);
+		boolean result = base.retainAll(c);
 		
-		diff.removeAll(c);
-		fireUpdate(diff, false);
-		
-		return retainAll;
+		if (result) {
+			diff.removeAll(c);
+			fireUpdate(diff, false);
+		}
+		return result;
 	}
 
 	public int size() {

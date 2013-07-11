@@ -21,7 +21,9 @@ public class ObservableList<E> extends ObservableCollection<E> implements
 
 	public boolean addAll(int index, Collection<? extends E> c) {
 		boolean result = base.addAll(index, c);
-		fireUpdate(new ArrayList<E>(c), true);
+		if (result) {
+			fireUpdate(new ArrayList<E>(c), true);
+		}
 		return result;
 	}
 
@@ -30,17 +32,9 @@ public class ObservableList<E> extends ObservableCollection<E> implements
 	}
 
 	public E set(int index, E element) {
-		E removed = null;
-		try {
-			removed = base.get(index);
-		} catch (Exception e) {
-			// do nothing
-		}
 		E result = base.set(index, element);
 
-		if (removed != null) {
-			fireUpdate(removed, false);
-		}
+		fireUpdate(result, false);
 		fireUpdate(element, true);
 
 		return result;

@@ -40,11 +40,9 @@ class ObservableListIterator<E> extends ObservableIterator<E> implements
 
 	public void set(E e) {
 		baseIt.set(e);
-		if (lastResult != null) {
-			list.fireUpdate(lastResult, false);
-		}
-		lastResult = e;
+		list.fireUpdate(lastResult, false);
 		list.fireUpdate(e, true);
+		lastResult = e;
 	}
 
 }

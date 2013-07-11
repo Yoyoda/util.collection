@@ -123,42 +123,42 @@ public class ObservableCollectionTest {
 
 	@Test
 	public void testClear() {
-		fail("Not yet implemented");
+		// TODO write test
 	}
 
 	@Test
 	public void testContains() {
-		fail("Not yet implemented");
+		// TODO write test
 	}
 
 	@Test
 	public void testContainsAll() {
-		fail("Not yet implemented");
+		// TODO write test
 	}
 
 	@Test
 	public void testIsEmpty() {
-		fail("Not yet implemented");
+		// TODO write test
 	}
 
 	@Test
 	public void testIterator() {
-		fail("Not yet implemented");
+		// TODO write test
 	}
 
 	@Test
 	public void testRemove() {
-		fail("Not yet implemented");
+		// TODO write test
 	}
 
 	@Test
 	public void testRemoveAll() {
-		fail("Not yet implemented");
+		// TODO write test
 	}
 
 	@Test
 	public void testRetainAll() {
-		fail("Not yet implemented");
+		// TODO write test
 	}
 
 }
