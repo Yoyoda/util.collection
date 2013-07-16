@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ses</groupId>
 	<artifactId>util.collection</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>Improved Collection API</name>
 	<dependencies>
 		<dependency>

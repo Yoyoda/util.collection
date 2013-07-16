@@ -3,6 +3,7 @@ package com.ses.util.collection;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.After;
@@ -96,7 +97,26 @@ public class ObservableListTest {
 
 	@Test
 	public void testListIterator() {
-		// TODO write test
+		list.add(Foo.FOO);
+		list.getObservers().add(new CollectionObserver() {
+			
+			public <E> void receiveCollectionUpdateEvent(
+					ObservableCollection<E> collection, boolean isAddition, List<E> diff) {
+				assertFalse(isAddition);
+				assertSame(list, collection);
+				assertTrue(diff.contains(Foo.FOO));
+				result++;
+			}
+		});
+		
+		for (Iterator<Foo> it = list.iterator(); it.hasNext();) {
+			Foo next = it.next();
+			assertSame(Foo.FOO, next);
+			it.remove();
+		}
+		
+		assertTrue(list.isEmpty());
+		assertEquals(1, result);
 	}
 
 	@Test
